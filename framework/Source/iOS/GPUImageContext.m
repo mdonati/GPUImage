@@ -1,3 +1,4 @@
+#import <UIKit/UIKit.h>
 #import "GPUImageContext.h"
 #import <OpenGLES/EAGLDrawable.h>
 #import <AVFoundation/AVFoundation.h>
@@ -210,7 +211,11 @@ static void *openGLESContextQueueKey;
 
 - (void)presentBufferForDisplay;
 {
-    [self.context presentRenderbuffer:GL_RENDERBUFFER];
+    // STRIP: Prevent opengl commands from running in the background
+    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        [self.context presentRenderbuffer:GL_RENDERBUFFER];
+    }
+    
 }
 
 - (GLProgram *)programForVertexShaderString:(NSString *)vertexShaderString fragmentShaderString:(NSString *)fragmentShaderString;
