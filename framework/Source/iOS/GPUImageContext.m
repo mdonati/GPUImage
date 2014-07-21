@@ -23,7 +23,6 @@
 @synthesize framebufferCache = _framebufferCache;
 
 static void *openGLESContextQueueKey;
-static BOOL isPaused;
 
 - (id)init;
 {
@@ -210,21 +209,10 @@ static BOOL isPaused;
     return adjustedSize;
 }
 
-// STRIP:
-+ (void)pause
-{
-    isPaused = YES;
-}
-
-+ (void)unpause
-{
-    isPaused = NO;
-}
-
 - (void)presentBufferForDisplay;
 {
     // STRIP: Prevent opengl commands from running in the background
-    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive && !isPaused) {
+    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         [self.context presentRenderbuffer:GL_RENDERBUFFER];
     }
     

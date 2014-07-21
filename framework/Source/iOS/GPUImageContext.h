@@ -30,10 +30,6 @@ typedef enum { kGPUImageNoRotation, kGPUImageRotateLeft, kGPUImageRotateRight, k
 + (BOOL)deviceSupportsFramebufferReads;
 + (CGSize)sizeThatFitsWithinATextureForSize:(CGSize)inputSize;
 
-// STRIP:
-+ (void)pause;
-+ (void)unpause;
-
 - (void)presentBufferForDisplay;
 - (GLProgram *)programForVertexShaderString:(NSString *)vertexShaderString fragmentShaderString:(NSString *)fragmentShaderString;
 
